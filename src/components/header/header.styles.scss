@@ -25,4 +25,22 @@
       padding: 10px 15px;
     }
   }
+
+  a {
+    position: relative;
+  }
+  .left span::before {
+    content: '';
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #000;
+    transition: 0.2s;
+  }
+  .left span:hover:before {
+    width: 100%;
+    left: 0;
+  }
 }

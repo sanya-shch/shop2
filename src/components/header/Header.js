@@ -9,11 +9,11 @@ const Header = () => (
             <Logo className='logo' />
         </Link>
         <div className='options'>
-            <Link className='option' to='/shop'>
-                SHOP
+            <Link className='option left' to='/shop'>
+                <span>SHOP</span>
             </Link>
-            <Link className='option' to='/shop'>
-                CONTACT
+            <Link className='option left' to='/shop'>
+                <span>CONTACT</span>
             </Link>
         </div>
     </div>
