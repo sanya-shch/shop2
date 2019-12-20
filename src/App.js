@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import Homepage from './pages/home/Homepage';
 import ShopPage from './pages/shop/ShopPage.js';
+import Header from './components/header/Header';
 
 const HatsPage = () => (
     <div>
@@ -37,6 +38,7 @@ const MensPage = () => (
 function App() {
   return (
       <div>
+          <Header />
           <Switch>
               <Route exact path='/' component={Homepage} />
               <Route path='/hats' component={HatsPage} />
