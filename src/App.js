@@ -5,7 +5,7 @@ import Homepage from './pages/home/Homepage';
 import ShopPage from './pages/shop/ShopPage.js';
 import Header from './components/header/Header';
 import SignInAndSignUpPage from './pages/sign-in_up/SignIn&Up';
-import { auth } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 const HatsPage = () => (
     <div>
@@ -37,36 +37,35 @@ const MensPage = () => (
     </div>
 );
 
-// function App() {
-//   return (
-//       <div>
-//           <Header />
-//           <Switch>
-//               <Route exact path='/' component={Homepage} />
-//               <Route path='/hats' component={HatsPage} />
-//               <Route path='/jackets' component={JacketsPage} />
-//               <Route path='/sneakers' component={SneakersPage} />
-//               <Route path='/womens' component={WomensPage} />
-//               <Route path='/mens' component={MensPage} />
-//               <Route path='/shop' component={ShopPage} />
-//               <Route path='/signin' component={SignInAndSignUpPage} />
-//           </Switch>
-//       </div>
-//   );
-// }
-
 class App extends React.Component {
-    state = {
-        currentUser: null
-    };
+    constructor() {
+        super();
+
+        this.state = {
+            currentUser: null
+        };
+    }
 
     unsubscribeFromAuth = null;
 
     componentDidMount() {
-        this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-            this.setState({ currentUser: user });
+        this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+            if (userAuth) {
+                const userRef = await createUserProfileDocument(userAuth);
 
-            console.log(user);
+                userRef.onSnapshot(snapShot => {
+                    this.setState({
+                        currentUser: {
+                            id: snapShot.id,
+                            ...snapShot.data()
+                        }
+                    });
+
+                    console.log(this.state);
+                });
+            }
+
+            this.setState({ currentUser: userAuth });
         });
     }
 
@@ -80,11 +79,6 @@ class App extends React.Component {
                 <Header currentUser={this.state.currentUser} />
                 <Switch>
                     <Route exact path='/' component={Homepage} />
-                    <Route path='/hats' component={HatsPage} />
-                    <Route path='/jackets' component={JacketsPage} />
-                    <Route path='/sneakers' component={SneakersPage} />
-                    <Route path='/womens' component={WomensPage} />
-                    <Route path='/mens' component={MensPage} />
                     <Route path='/shop' component={ShopPage} />
                     <Route path='/signin' component={SignInAndSignUpPage} />
                 </Switch>
