@@ -23,13 +23,14 @@
 
     .option {
       padding: 10px 15px;
+      cursor: pointer;
     }
   }
 
   a {
     position: relative;
   }
-  .left span::before {
+  .options .option::before {
     content: '';
     bottom: 0;
     right: 0;
@@ -39,7 +40,7 @@
     background-color: #000;
     transition: 0.2s;
   }
-  .left span:hover:before {
+  .options .option:hover:before {
     width: 100%;
     left: 0;
   }
