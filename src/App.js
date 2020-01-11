@@ -4,43 +4,13 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import './App.css';
 import Homepage from './pages/home/Homepage';
-import ShopPage from './pages/shop/ShopPage.js';
+import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
 import SignInAndSignUpPage from './pages/sign-in_up/SignIn&Up';
 import CheckoutPage from './pages/checkout/Checkout';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
-
-const HatsPage = () => (
-    <div>
-        <h1>HATS PAGE </h1>
-    </div>
-);
-
-const JacketsPage = () => (
-    <div>
-        <h1>JACKETS PAGE </h1>
-    </div>
-);
-
-const SneakersPage = () => (
-    <div>
-        <h1>SNEAKERS PAGE </h1>
-    </div>
-);
-
-const WomensPage = () => (
-    <div>
-        <h1>WOMENS PAGE </h1>
-    </div>
-);
-
-const MensPage = () => (
-    <div>
-        <h1>MENS PAGE </h1>
-    </div>
-);
 
 class App extends React.Component {
     unsubscribeFromAuth = null;
@@ -75,11 +45,6 @@ class App extends React.Component {
                 <Switch>
                     <Route exact path='/' component={Homepage} />
                     <Route path='/shop' component={ShopPage} />
-                    <Route path='/hats' component={HatsPage} />
-                    <Route path='/jackets' component={JacketsPage} />
-                    <Route path='/sneakers' component={SneakersPage} />
-                    <Route path='/womens' component={WomensPage} />
-                    <Route path='/mens' component={MensPage} />
                     <Route exact path='/checkout' component={CheckoutPage} />
                     <Route
                         exact
